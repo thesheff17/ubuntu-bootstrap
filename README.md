@@ -18,7 +18,7 @@ sudo apt-get update
 sudo apt-get upgrade -y
 
 sudo apt-get install build-essential -y
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # adds entries to default files for brew
 echo >> /home/ubuntu/.bashrc
