@@ -1,0 +1,54 @@
+---
+- name: deploy forgejo via docker compose
+  hosts: all
+  become: true
+  vars:
+    # Define installation directory and container paths
+    forgejo_dir: "/opt/forgejo"
+    forgejo_version: "11" # Pinning to major version 11 as per current docs
+
+    # Environment variables mapping for the Forgejo container
+    # Adjust these values if your deployment environment differs
+    forgejo_user_uid: "1000"
+    forgejo_user_gid: "1000"
+
+  tasks:
+    - name: ensure the forgejo directory exists
+      ansible.builtin.file:
+        path: "{{ forgejo_dir }}"
+        state: directory
+        mode: '0755'
+        owner: root
+        group: root
+
+    - name: create docker-compose.yml from official forgejo template
+      ansible.builtin.copy:
+        dest: "{{ forgejo_dir }}/docker-compose.yml"
+        mode: '0644'
+        content: |
+          networks:
+            forgejo:
+              external: false
+
+          services:
+            server:
+              image: codeberg.org/forgejo/forgejo:{{ forgejo_version }}
+              container_name: forgejo
+              environment:
+                - USER_UID={{ forgejo_user_uid }}
+                - USER_GID={{ forgejo_user_gid }}
+              restart: always
+              networks:
+                - forgejo
+              volumes:
+                - ./forgejo:/data
+                - /etc/timezone:/etc/timezone:ro
+                - /etc/localtime:/etc/localtime:ro
+              ports:
+                - "3000:3000"
+                - "222:22"
+
+    - name: run Forgejo container via docker compose
+      community.docker.docker_compose_v2:
+        project_src: "{{ forgejo_dir }}"
+        state: present
