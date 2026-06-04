@@ -14,7 +14,7 @@
         upgrade: dist
         cache_valid_time: 3600  # Only update cache if it hasn't been updated in the last hour
 
-    - name: Update apt cache and install prerequisite packages
+    - name: update apt cache and install prerequisite packages
       apt:
         name:
           - apt-transport-https
@@ -31,19 +31,19 @@
         state: present
         update_cache: true
 
-    - name: Create directory for apt keyrings
+    - name: create directory for apt keyrings
       ansible.builtin.file:
         path: /etc/apt/keyrings
         state: directory
         mode: '0755'
 
-    - name: Download Docker's official GPG key
+    - name: download docker's official GPG key
       ansible.builtin.get_url:
         url: https://download.docker.com/linux/ubuntu/gpg
         dest: /etc/apt/keyrings/docker.asc
         mode: '0644'
 
-    - name: Add Docker DEB822 repository
+    - name: add docker DEB822 repository
       ansible.builtin.deb822_repository:
         name: docker
         state: present
@@ -53,7 +53,7 @@
         components: [stable]
         signed_by: /etc/apt/keyrings/docker.asc
 
-    - name: Install Docker packages
+    - name: install docker packages
       ansible.builtin.apt:
         name:
           - docker-ce
@@ -64,13 +64,13 @@
         state: present
         update_cache: true
 
-    - name: "comment out disable cri plugin"
+    - name: comment out disable cri plugin
       replace:
         path: /etc/containerd/config.toml
         regexp: 'disabled_plugins = \[\"cri\"\]'
         replace: '# disabled_plugins = ["cri"]'
 
-    - name: Add ubuntu to docker group
+    - name: add ubuntu to docker group
       ansible.builtin.user:
         name: ubuntu
         groups: docker
@@ -82,7 +82,11 @@
     - name: enable and start containerd
       command: systemctl enable --now containerd
 
-    - name: Restart docker service
+    - name: restart docker service
       ansible.builtin.service:
         name: containerd
         state: restarted
+    
+    - name: message
+      ansible.builtin.debug:
+        msg: "you should reboot this device now. sudo reboot"
