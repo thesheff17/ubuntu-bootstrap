@@ -3,8 +3,17 @@
 ### This repo will bootstrap ubuntu LTS containers with ansible
 
 ### prerequisites
-run updates and install brew
+
+make sure sudo does not require a password:
+```bash
+sudo visudo
+
+# add this to 2nd to last line:
+ubuntu ALL=(ALL) NOPASSWD: ALL
 ```
+
+run updates and install brew
+```bash
 sudo apt-get update 
 sudo apt-get upgrade -y
 
@@ -18,7 +27,7 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
 ```
 
 install ansible
-```
+```bash
 # install ansible
 brew install ansible
 
@@ -27,14 +36,14 @@ ansible --version
 ```
 
 create git directory and clone repo
-```
+```bash
 mkdir ~/git/
 cd ~/git/
 git clone https://github.com/thesheff17/ubuntu-bootstrap
 ```
 
 # run playbook
-```
+```bash
 cd ubuntu-bootstrap
-ansible-playbook -i hosts2 playbooks/base.yaml --connection=local
+time ansible-playbook -i hosts playbooks/base.yaml --connection=local
 ```
