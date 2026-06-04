@@ -5,7 +5,7 @@
   vars:
     # Define installation directory and container paths
     forgejo_dir: "/opt/forgejo"
-    forgejo_version: "11" # Pinning to major version 11 as per current docs
+    forgejo_version: "15" # Pinning to major version 11 as per current docs
 
     # Environment variables mapping for the Forgejo container
     # Adjust these values if your deployment environment differs
