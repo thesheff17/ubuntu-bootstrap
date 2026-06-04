@@ -15,7 +15,7 @@
         cache_valid_time: 3600  # Only update cache if it hasn't been updated in the last hour
 
     - name: Update apt cache and install prerequisite packages
-      劇apt:
+      apt:
         name:
           - apt-transport-https
           - build-essential
