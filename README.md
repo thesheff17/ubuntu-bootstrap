@@ -48,13 +48,25 @@ default base playbook contains basic packages + docker
 ```bash
 cd ubuntu-bootstrap
 time ansible-playbook -i hosts playbooks/base.yaml --connection=local
+sudo reboot
 ```
 
-deploy [forgejo](https://forgejo.org/) using docker
+deploy [forgejo](https://forgejo.org/)
 
 ```bash
 time ansible-playbook -i hosts playbooks/deploy-forgejo.yaml --connection=local
 ```
 Now visit http://IP:3000 and follow the forgejo installation.
 
-One thing I ran into is make sure when you go to add your additional `git remote add origin2 url` that you use: `ssh://git@IP:222/username/repo-name.git` with the port number.  The forgejo website doesn't have this and if you leave out the port number it will try to talk to the docker host and not the forgejo container.
+## make sure you watch port numbers when running git remote add
+
+One thing I ran into is make sure when you go to add your additional `git remote add origin2 url` that you use: `ssh://git@IP:222/username/repo-name.git` with the port number.  The forgejo website doesn't have port number and if you leave out the port number it will try to talk to the docker host and not the forgejo container running inside docker.  Look at `/opt/forgejo/docker-compose.yml` to control this more.  Backups of this data are outside this scope but forgejo provides great documentation on upgrading.  Check out the docs [here.](https://forgejo.org/docs/latest/admin/upgrade/)
+
+
+# why forgejo vs github.com
+
+github.com has been a disaster since microsoft took over.  I will mirror this repo to github.com but it may be significantly behind my local forgejo setup.  I no longer consider github.com a viable solution for developers/companies anymore.  You should really consider self hosting at this point. If you want a decent review on why, watch this youtube video [here.](https://www.youtube.com/watch?v=d53Zk28esmU) Loosing pull requests and code are crazy to me.  Also don't get me started on github actions and pricing.  At this point I would rather just run my own git runners through forgejo.  Microsoft/github you can do better.
+
+# which order to run playbooks
+
+Always run `base.yaml` first and `reboot` to setup basic packages and docker.  Then all other playbooks should be self contained.  You should not have playbooks depend on other playbooks.  I would rather have some duplicated playbook code vs a crazy dependency tree for playbook order.  At any given time you should be able to run `base.yaml` and 1 other playbook to configure the service/server.  Ask if you have questions. 
