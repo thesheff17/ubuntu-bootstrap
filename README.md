@@ -72,7 +72,7 @@ github.com has been a disaster since microsoft took over.  I will mirror this re
 Always run `base.yaml` first and `reboot` to setup basic packages and docker.  Then all other playbooks should be self contained.  You should not have playbooks depend on other playbooks.  I would rather have some duplicated playbook code vs a crazy dependency tree for playbook order.  At any given time you should be able to run `base.yaml` and 1 other playbook to configure the service/server.  Ask if you have questions. 
 
 # automatically display IP address on console without login
-create file: `/etc/issue` and add the following 3 lines.  Change`ens18` to your network adapter.  This should display the IPV4 address at loging screen.  This helped when I was using proxmox and testing a bunch of different Virtual machines I didn't want to login to get the IP.
+create file: `/etc/issue` and add the following 3 lines.  Change`ens18` to your network adapter.  This should display the IPV4 address at login screen without logging in.  This helped when I was using proxmox and testing a bunch of different Virtual machines I didn't want to login to get the IP.
 ```bash
 Ubuntu 26.04 LTS
 IP: \4{ens18}
