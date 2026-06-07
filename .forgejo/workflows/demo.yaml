@@ -1,0 +1,14 @@
+name: Run My Task
+on: 
+  push:         # Triggers the task every time you push code
+    branches: [ main ]
+
+jobs:
+  my-task:
+    runs-on: docker  # MUST match your runner's label
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+        
+      - name: Run a shell command
+        run: echo "Hello from the Forgejo runner!"

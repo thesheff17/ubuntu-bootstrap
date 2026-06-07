@@ -78,3 +78,92 @@ Ubuntu 26.04 LTS
 IP: \4{ens18}
 \l
 ```
+
+# setting up a forgejo worker
+
+clone ubuntu 26.04 template
+
+set hostname
+```bash
+sudo hostnamectl set-hostname forg-worker-01
+```
+
+edit /etc/hosts and set `127.0.1.1` to `forg-worker-01` example:
+```bash
+127.0.0.1 localhost
+127.0.1.1 forg-worker-01
+
+# The following lines are desirable for IPv6 capable hosts
+::1     ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+```
+
+# configure the node with the `base.yaml` above and reboot.
+
+
+# setup forgejo and auth for runners
+
+on the for forgejo dashboard select profile icon top right, select settings, actions, runners, create new runner. Document this information somewhere safe and not in git.  
+
+# install forgejo binary.
+```bash
+export ARCH=$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/')
+export RUNNER_VERSION=$(curl -X 'GET' https://data.forgejo.org/api/v1/repos/forgejo/runner/releases/latest | jq .name -r | cut -c 2-)
+export FORGEJO_URL="https://code.forgejo.org/forgejo/runner/releases/download/v${RUNNER_VERSION}/forgejo-runner-${RUNNER_VERSION}-linux-${ARCH}"
+wget -O forgejo-runner ${FORGEJO_URL} || curl -o forgejo-runner ${FORGEJO_URL}
+chmod +x forgejo-runner
+wget -O forgejo-runner.asc ${FORGEJO_URL}.asc || curl -o forgejo-runner.asc ${FORGEJO_URL}.asc
+gpg --keyserver hkps://keys.openpgp.org --recv EB114F5E6C0DC2BCDD183550A4B61A2DC5923710
+gpg --verify forgejo-runner.asc forgejo-runner && echo "✓ Verified" || echo "✗ Failed"
+# Good signature from "Forgejo <contact@forgejo.org>"
+#         aka "Forgejo Releases <release@forgejo.org>"
+# ✓ Verified
+
+# install binary
+sudo cp forgejo-runner /usr/local/bin/forgejo-runner
+```
+
+
+```bash
+# put the token in a file
+echo -n "token" > /home/ubuntu/.ssh/forg-token
+
+# replace IP address and uuid token from forg dashboard.
+forgejo-runner daemon \
+        --url http://IP:3000/ \
+        --uuid token \
+        --token-url /home/ubuntu/.ssh/forg-token \
+        --label docker:docker://node:lts
+
+```
+
+start service in forground for testing.  Replace IP and uuid-number below.
+```bash
+forgejo-runner daemon \
+        --url http://IP:3000/ \
+        --uuid uuid-number \
+        --token-url file:////home/ubuntu/.ssh/forg-token \
+        --label docker:docker://node:lts
+```
+check forgejo dashboard.  The runner should be green and idle.
+
+create your first runner yaml file under: `.forgejo/workflows/demo.yaml` and add the following:
+```yml
+name: Run My Task
+on: 
+  push:         # Triggers the task every time you push code
+    branches: [ main ]
+
+jobs:
+  my-task:
+    runs-on: docker  # MUST match your runner's label
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+        
+      - name: Run a shell command
+        run: echo "Hello from the Forgejo runner!"
+```
