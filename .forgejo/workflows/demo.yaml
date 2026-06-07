@@ -17,7 +17,7 @@ jobs:
         run: lscpu
 
       - name: RAM info
-        run: lshw -c memory
+        run: free -m
 
       - name: hard drive info
         run: df -h --total
