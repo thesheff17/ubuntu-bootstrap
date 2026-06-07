@@ -17,7 +17,7 @@ jobs:
         run: lscpu
 
       - name: RAM info
-        run: sudo lshw -c memory
+        run: lshw -c memory
 
       - name: hard drive info
         run: df -h --total
