@@ -124,29 +124,25 @@ gpg --verify forgejo-runner.asc forgejo-runner && echo "âœ“ Verified" || echo "â
 
 # install binary
 sudo cp forgejo-runner /usr/local/bin/forgejo-runner
+
+# generate new config file
+forgejo-runner generate-config > /home/ubuntu/runner-config.yml
 ```
 
 
 ```bash
-# put the token in a file
-echo -n "token" > /home/ubuntu/.ssh/forg-token
-
-# replace IP address and uuid token from forg dashboard.
-forgejo-runner daemon \
-        --url http://IP:3000/ \
-        --uuid token \
-        --token-url /home/ubuntu/.ssh/forg-token \
-        --label docker:docker://node:lts
-
+# now copy/paste your server: entry from the forgejo dashboard into config file.
+server:
+  connections:
+    forgejo:
+      url: http://IP:3000/
+      uuid: uuid
+      token: token
 ```
 
 start service in forground for testing.  Replace IP and uuid-number below.
 ```bash
-forgejo-runner daemon \
-        --url http://IP:3000/ \
-        --uuid uuid-number \
-        --token-url file:////home/ubuntu/.ssh/forg-token \
-        --label docker:docker://node:lts
+forgejo-runner daemon -c /home/ubuntu/runner-config.yml
 ```
 check forgejo dashboard.  The runner should be green and idle.
 
@@ -167,3 +163,37 @@ jobs:
       - name: Run a shell command
         run: echo "Hello from the Forgejo runner!"
 ```
+
+setup runner to run as a service
+create: `/etc/systemd/system/forgejo-runner.service`
+
+```bash
+[Unit]
+Description=Forgejo Runner
+Documentation=https://forgejo.org/docs/latest/admin/actions/
+After=docker.service
+
+[Service]
+ExecStart=/usr/local/bin/forgejo-runner daemon -c /home/ubuntu/runner-config.yml
+ExecReload=/bin/kill -s HUP $MAINPID
+
+# This user and working directory must already exist
+User=ubuntu
+WorkingDirectory=/home/ubuntu
+Restart=on-failure
+# allow configured shutdown_timeout to be effective, rather than overridden by systemd
+TimeoutStopSec=infinity
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
+```
+
+# start service and check
+```bash
+sudo systemctl daemon-reload 
+sudo systemctl start forgejo-runner.service
+sudo systemctl enable forgejo-runner.service
+sudo journalctl -u forgejo-runner.service
+```
+check dashboard to see if node is working.

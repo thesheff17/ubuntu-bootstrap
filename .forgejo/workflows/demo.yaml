@@ -1,4 +1,4 @@
-name: Run My Task
+name: example task
 on: 
   push:         # Triggers the task every time you push code
     branches: [ main ]
@@ -10,5 +10,14 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
         
-      - name: Run a shell command
-        run: echo "Hello from the Forgejo runner!"
+      - name: hostname
+        run: echo "$HOSTNAME"
+
+      - name: CPU info
+        run: lscpu
+
+      - name: RAM info
+        run: sudo lshw -c memory
+
+      - name: hard drive info
+        run: df -h --total
