@@ -138,6 +138,7 @@ server:
       url: http://IP:3000/
       uuid: uuid
       token: token
+      labels: [docker]
 ```
 
 start service in forground for testing.  Replace IP and uuid-number below.
