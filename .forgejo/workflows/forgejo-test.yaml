@@ -71,7 +71,7 @@ jobs:
 
       - name: Check Forgejo web UI
         run: |
-          curl -sf http://localhost:3000 | head -5 && echo "Forgejo web UI is responding"
+          curl -sf http://0.0.0.0:3000 | head -5 && echo "Forgejo web UI is responding"
 
       - name: Smoke test — verify tools
         run: |
