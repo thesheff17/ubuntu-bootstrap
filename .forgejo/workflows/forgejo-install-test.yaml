@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  bootstrap-test:
+  forgejo-install-test:
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/catthehacker/ubuntu:act-24.04
