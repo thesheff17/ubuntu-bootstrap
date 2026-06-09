@@ -92,4 +92,4 @@ yes I'm using a bunch random local tools.  I won't pay for any of this.
 - [llama.cpp](https://github.com/ggml-org/llama.cpp)
 - [lm studio](https://lmstudio.ai/)
 - [langchain](https://github.com/langchain-ai/langchain)
-- [opecode](https://opencode.ai/)
+- [opencode](https://opencode.ai/)
