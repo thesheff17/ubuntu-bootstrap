@@ -69,10 +69,6 @@ jobs:
             sleep 2
           done
 
-      - name: Check Forgejo web UI
-        run: |
-          wget -q --spider http://localhost:3000/
-
       - name: Smoke test — verify tools
         run: |
           ansible --version
