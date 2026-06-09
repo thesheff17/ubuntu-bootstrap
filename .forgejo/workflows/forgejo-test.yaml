@@ -1,4 +1,4 @@
-name: bootstrap test
+name: forgejo install test
 on:
   push:
     branches: [main]
