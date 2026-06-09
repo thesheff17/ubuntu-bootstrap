@@ -1,6 +1,6 @@
-## ubuntu-bootstrap
+# ubuntu-bootstrap
 
-### This repo will bootstrap ubuntu LTS containers with ansible
+## This repo will bootstrap ubuntu LTS containers with ansible
 
 ### prerequisites
 
@@ -84,3 +84,12 @@ IP: \4{ens18}
 I will link to the current tutorials I am working on.  Please make PR if you see issues.  
 
 [forgejo-worker](./tutorials/forgejo-worker.md)
+
+# do you use AI tools? 
+
+yes I'm using a bunch random local tools.  I won't pay for any of this.
+
+- [llama.cpp](https://github.com/ggml-org/llama.cpp)
+- [lm studio](https://lmstudio.ai/)
+- [langchain](https://github.com/langchain-ai/langchain)
+- [opecode](https://opencode.ai/)
