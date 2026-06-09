@@ -55,15 +55,25 @@ forgejo-runner generate-config > /home/ubuntu/runner-config.yml
 ```
 
 
+# now copy/paste your server: entry from the forgejo dashboard into config file. Verify all settings.
+
+- check IP and port
+- check uuid
+- check token
+- check labels
+- change these settings:
+  * docker: automount
+  * privileged: true
+
+
 ```bash
-# now copy/paste your server: entry from the forgejo dashboard into config file.
 server:
   connections:
     forgejo:
       url: http://IP:3000/
       uuid: uuid
       token: token
-      labels: [docker]
+      labels: [docker, ubuntu-latest]
 ```
 
 start service in forground for testing.  Replace IP and uuid-number below.
@@ -115,7 +125,7 @@ RestartSec=10
 WantedBy=multi-user.target
 ```
 
-# start service and check
+# start/stop/restart service, enable service, and check logs
 ```bash
 sudo systemctl daemon-reload 
 sudo systemctl start forgejo-runner.service
@@ -123,3 +133,8 @@ sudo systemctl enable forgejo-runner.service
 sudo journalctl -u forgejo-runner.service
 ```
 check dashboard to see if node is working.
+
+If you need to restart the service:
+```
+systemctl restart forgejo-runner
+```
