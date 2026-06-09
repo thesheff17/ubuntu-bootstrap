@@ -93,3 +93,23 @@ yes I'm using a bunch random local tools.  I won't pay for any of this.
 - [lm studio](https://lmstudio.ai/)
 - [langchain](https://github.com/langchain-ai/langchain)
 - [opencode](https://opencode.ai/)
+
+# is there a release/install structure?
+
+No not at this time.  I consider this all very experimental code base and I assume you know what you are doing if you are using any of this.  I am also constantly patching/updating CI/CD pipelines (forgejo actions).
+
+
+Make your own versions up if you want to manage the code like this.
+```
+git clone https://github.com/thesheff17/ubuntu-bootstrap ubuntu-bootstrap-1.0 
+```
+Time passes:
+```
+git clone https://github.com/thesheff17/ubuntu-bootstrap ubuntu-bootstrap-1.1
+```
+compare versions:
+```
+diff -r ubuntu-bootstrap-1.0 ubuntu-bootstrap-1.1
+```
+
+You can also see git commit history [here.](https://github.com/thesheff17/ubuntu-bootstrap/commits/main/)
