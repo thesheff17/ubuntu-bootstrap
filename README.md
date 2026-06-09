@@ -17,7 +17,7 @@ run updates and install brew
 sudo apt-get update 
 sudo apt-get upgrade -y
 
-sudo apt-get install build-essential -y
+sudo apt-get install build-essential procps curl file git -y
 NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # adds entries to default files for brew
