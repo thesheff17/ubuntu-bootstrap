@@ -53,6 +53,10 @@ jobs:
           ls -la /opt/forgejo/docker-compose.yml
           echo "Forgejo compose file created successfully"
 
+      - name: Pause for 5 seconds
+        ansible.builtin.pause:
+          seconds: 5
+
       - name: Verify Forgejo is running
         run: |
           # Wait for container to start
