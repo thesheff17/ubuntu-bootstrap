@@ -105,7 +105,7 @@
     
     - name: message
       ansible.builtin.debug:
-        msg: "{{ item }}"
+        msg: "{{ item.name }}"
       loop:
         - "you should reboot this device now."
         - "server: sudo reboot"
