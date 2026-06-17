@@ -143,4 +143,4 @@ yes I'm using a bunch random local tools.  I won't pay for any of this.
 - download the repo so you have the suppot scripts so you don't even have to copy/paste.  Should be in /home/ubuntu/git/ubuntu-bootstrap/ directory.
 - take timeshift image so you can restore at this point.  
     This should be super easy to reastore to this point and then continue testing.
-    `sudo thimeshift --restore`
+    `sudo timeshift --restore`
