@@ -50,7 +50,7 @@
         state: present
         types: [deb]
         uris: "https://download.docker.com/linux/ubuntu"
-        suites: ["{{ ansible_distribution_release }}"]
+        suites: stable
         components: [stable]
         signed_by: /etc/apt/keyrings/docker.asc
 
