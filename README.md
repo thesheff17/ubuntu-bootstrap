@@ -57,6 +57,8 @@ sudo reboot
 # sudo systemctl reboot -i
 ```
 
+There is a helper script in `scripts/boostrap.sh`
+
 deploy [forgejo](https://forgejo.org/)
 
 ```bash
@@ -130,3 +132,15 @@ yes I'm using a bunch random local tools.  I won't pay for any of this.
 - [lm studio](https://lmstudio.ai/)
 - [langchain](https://github.com/langchain-ai/langchain)
 - [opencode](https://opencode.ai/)
+
+# preparing a bare metal laptop for testing:
+
+- install latest ubuntu desktop LTS
+- run updates
+- disable power management stuff
+- install ssh, add your public key(s), and start/enable services
+- disable sudo password
+- download the repo so you have the suppot scripts so you don't even have to copy/paste.  Should be in /home/ubuntu/git/ubuntu-bootstrap/ directory.
+- take timeshift image so you can restore at this point.  
+    This should be super easy to reastore to this point and then continue testing.
+    `sudo thimeshift --restore`
