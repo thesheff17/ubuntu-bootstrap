@@ -2,6 +2,7 @@
 
 This is a dumping ground of random things I would like to eventually do. 
 
+- [ ] - write a playbook for ssh service or add to base.yaml
 - [ ] - get forgejo ready to display on twitch and make sure the forgejo runner logs can be shown.  Demo tests and see if I can run the vscode playbook.
 - [ ] - create a agents.md file for this repo.
 - [ ] - test using python uv setup to manage python pip packages.
