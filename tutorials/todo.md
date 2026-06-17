@@ -2,7 +2,7 @@
 
 This is a dumping ground of random things I would might eventually need and write. 
 
-
+- [ ] - get rid of any ansible warnings
 - [ ] - automate install of AI tools
 - [x] - automate vscode install
 - [ ] - automate monitor tool with docker support
