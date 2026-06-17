@@ -135,12 +135,21 @@ yes I'm using a bunch random local tools.  I won't pay for any of this.
 
 # preparing a bare metal laptop for testing:
 
+
+## setup
 - install latest ubuntu desktop LTS
 - run updates and reboot
 - disable power management stuff
 - install ssh, add your public key(s), and start/enable services
 - disable sudo password
-- download the repo so you have the suppot scripts so you don't even have to copy/paste.  Should be in /home/ubuntu/git/ubuntu-bootstrap/ directory.
-- take timeshift image so you can restore at this point.  
-    This should be super easy to reastore to this point and then continue testing.
-    `sudo timeshift --restore`
+- set display to mirror if you are streaming on twitch so you don't have to change this every time
+- git clone the repo so you don't have to copy/paste commands.  Should be in /home/ubuntu/git/ubuntu-bootstrap/ directory.
+- take timeshift image so you can restore up to this point easily.  
+    
+
+## restore
+This should be super easy to restore to this point and then continue testing.
+
+```bash
+sudo timeshift --restore
+```
