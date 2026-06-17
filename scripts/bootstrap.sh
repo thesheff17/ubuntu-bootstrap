@@ -21,7 +21,7 @@ brew install ansible --yes
 ansible --version
 
 # already going to have the git repo locally so pull it
-cd /home/ubuntu/git/ubuntu-boostrap/
+cd /home/ubuntu/git/ubuntu-bootstrap/
 git pull
 
 # run base playbook
