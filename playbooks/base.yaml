@@ -17,6 +17,7 @@
     - name: update apt cache and install prerequisite packages
       apt:
         name:
+          - apt-utils
           - apt-transport-https
           - build-essential
           - ca-certificates

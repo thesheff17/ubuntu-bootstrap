@@ -12,7 +12,7 @@ sudo visudo
 ubuntu ALL=(ALL) NOPASSWD: ALL
 ```
 
-run updates and install brew
+run updates and install brew.  brew does not like to be ran as root.  Make sure you run this as a non privileged user and use `sudo` 
 ```bash
 sudo apt-get update 
 sudo apt-get upgrade -y
@@ -29,7 +29,7 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
 install ansible
 ```bash
 # install ansible
-brew install ansible
+brew install ansible --yes
 
 # check version
 ansible --version
@@ -41,6 +41,10 @@ mkdir ~/git/
 cd ~/git/
 git clone https://github.com/thesheff17/ubuntu-bootstrap
 ```
+# optional: change scroll touchpad direction
+```bash
+gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll false
+```
 
 # run base playbook
 
@@ -49,6 +53,8 @@ default base playbook contains basic packages + docker
 cd ubuntu-bootstrap
 time ansible-playbook -i hosts playbooks/base.yaml --connection=local
 sudo reboot
+
+# sudo systemctl reboot -i
 ```
 
 deploy [forgejo](https://forgejo.org/)
@@ -84,8 +90,9 @@ IP: \4{ens18}
 I will link to the current tutorials I am working on.  Please make PR if you see issues.  
 
 - [forgejo-worker](./tutorials/forgejo-worker.md)
-- [todo](./tutorials/todo.md)
 - [other-playbooks](./tutorials/other-playbooks.md)
+- [todo](./tutorials/todo.md)
+
 # Why isn't there a playbook for a forgejo-worker?
 
 While I think it would be possible to write this into a playbook it is a very limit subset of commands and requires a reboot after setting hostname.  It also contains sesitive tokens you will get from the forgejo server.  This is more proned to error if you don't know what you are doing.  Since my forgejo workers are virtual machines in proxmox I can scale these easily with CPU/RAM and just have a handful of runners.  If you need to scale to a crazy amount of runners I'm sure it can be scripted out but is beyond the scope of this repo.
