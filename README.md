@@ -83,16 +83,12 @@ IP: \4{ens18}
 
 I will link to the current tutorials I am working on.  Please make PR if you see issues.  
 
-[forgejo-worker](./tutorials/forgejo-worker.md)
+- [forgejo-worker](./tutorials/forgejo-worker.md)
+- [todo](./tutorials/todo.md)
+- [other-playbooks](./tutorials/other-playbooks.md)
+# Why isn't there a playbook for a forgejo-worker?
 
-# do you use AI tools? 
-
-yes I'm using a bunch random local tools.  I won't pay for any of this.
-
-- [llama.cpp](https://github.com/ggml-org/llama.cpp)
-- [lm studio](https://lmstudio.ai/)
-- [langchain](https://github.com/langchain-ai/langchain)
-- [opencode](https://opencode.ai/)
+While I think it would be possible to write this into a playbook it is a very limit subset of commands and requires a reboot after setting hostname.  It also contains sesitive tokens you will get from the forgejo server.  This is more proned to error if you don't know what you are doing.  Since my forgejo workers are virtual machines in proxmox I can scale these easily with CPU/RAM and just have a handful of runners.  If you need to scale to a crazy amount of runners I'm sure it can be scripted out but is beyond the scope of this repo.
 
 # is there a release/install structure?
 
@@ -118,3 +114,12 @@ diff -r ubuntu-bootstrap-1.0 ubuntu-bootstrap-1.1
 - [issues](https://github.com/thesheff17/ubuntu-bootstrap/issues) open an issue here.
 
 - [pull requests](https://github.com/thesheff17/ubuntu-bootstrap/pulls) open a pull request here.
+
+# do you use AI tools? 
+
+yes I'm using a bunch random local tools.  I won't pay for any of this.
+
+- [llama.cpp](https://github.com/ggml-org/llama.cpp)
+- [lm studio](https://lmstudio.ai/)
+- [langchain](https://github.com/langchain-ai/langchain)
+- [opencode](https://opencode.ai/)
