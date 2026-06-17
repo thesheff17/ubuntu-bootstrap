@@ -105,4 +105,7 @@
     
     - name: message
       ansible.builtin.debug:
-        msg: "you should reboot this device now. sudo reboot"
+        msg: 
+          - "you should reboot this device now."
+          - "server: sudo reboot"
+          - "desktop: sudo systemctl reboot -i"

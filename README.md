@@ -136,7 +136,7 @@ yes I'm using a bunch random local tools.  I won't pay for any of this.
 # preparing a bare metal laptop for testing:
 
 - install latest ubuntu desktop LTS
-- run updates
+- run updates and reboot
 - disable power management stuff
 - install ssh, add your public key(s), and start/enable services
 - disable sudo password
