@@ -14,6 +14,21 @@
         upgrade: dist
         cache_valid_time: 3600  # Only update cache if it hasn't been updated in the last hour
 
+    - name: Create a new user if they do not exist
+      ansible.builtin.user:
+        name: ubuntu
+        state: present
+        shell: /bin/bash
+        create_home: true
+
+    - name: suppress ubuntu banner
+      ansible.builtin.file:
+        path: /home/ubuntu/.hushlogin
+        state: touch
+        owner: ubuntu
+        group: ubuntu
+        mode: '0644'
+    
     - name: update apt cache and install prerequisite packages
       apt:
         name:
