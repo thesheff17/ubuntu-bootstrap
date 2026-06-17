@@ -40,11 +40,7 @@ create git directory and clone repo
 mkdir ~/git/
 cd ~/git/
 git clone https://github.com/thesheff17/ubuntu-bootstrap
-```
-# optional: change scroll touchpad direction
-```bash
-gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll false
-```
+
 
 # run base playbook
 
@@ -52,9 +48,8 @@ default base playbook contains basic packages + docker
 ```bash
 cd ubuntu-bootstrap
 time ansible-playbook -i hosts playbooks/base.yaml --connection=local
-sudo reboot
-
-# sudo systemctl reboot -i
+# server: sudo reboot
+# desktop: sudo systemctl reboot -i
 ```
 
 There is a helper script in `scripts/boostrap.sh`
