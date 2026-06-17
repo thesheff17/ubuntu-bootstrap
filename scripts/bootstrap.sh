@@ -1,5 +1,7 @@
 #!/bin/bash
 
+SECONDS=0
+
 # brew
 sudo apt-get update 
 sudo apt-get upgrade -y
@@ -25,4 +27,9 @@ cd /home/ubuntu/git/ubuntu-bootstrap/
 git pull
 
 # run base playbook
-time ansible-playbook -i hosts playbooks/base.yaml --connection=local
+ansible-playbook -i hosts playbooks/base.yaml --connection=local
+
+# elapsed time
+duration=$SECONDS
+elapsed_seconds=$((end_time - start_time))
+echo "bootstrap.sh completed - $((duration / 60)) minutes and $((duration % 60)) seconds elapsed."
