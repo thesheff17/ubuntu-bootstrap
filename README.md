@@ -70,6 +70,14 @@ Now visit http://IP:3000 and follow the forgejo installation.
 
 One thing I ran into is make sure when you go to add your additional `git remote add origin2 url` that you use: `ssh://git@IP:222/username/repo-name.git` with the port number.  The forgejo website doesn't have port number and if you leave out the port number it will try to talk to the docker host and not the forgejo container running inside docker.  Look at `/opt/forgejo/docker-compose.yml` to control this more.  Backups of this data are outside this scope but forgejo provides great documentation on upgrading.  Check out the docs [here.](https://forgejo.org/docs/latest/admin/upgrade/)
 
+You can also add multiple `origin` so you when you push it will go to both urls:
+```bash
+git remote set-url --add --push origin git_repo_link1
+git remote set-url --add --push origin git_repo_link2
+
+# show what you have set:
+git remote show origin
+```
 
 # why forgejo vs github.com
 
