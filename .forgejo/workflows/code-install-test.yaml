@@ -50,4 +50,5 @@ jobs:
 
       - name: Smoke test — verify vscode
         run: |
-          code --version
+          mkdir /root/vscode
+          code --version --no-sandbox --user-data-dir /root/vscode
