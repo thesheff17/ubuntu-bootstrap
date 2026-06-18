@@ -139,7 +139,11 @@ I'm testing on a old lenovo T460s laptop.  I'm leverage using this [timeshift](h
 - disable sudo password
 - set display to mirror if you are streaming on twitch so you don't have to change this every time
 - git clone the repo so you don't have to copy/paste commands.  Should be in /home/ubuntu/git/ubuntu-bootstrap/ directory.
-- take timeshift image so you can restore up to this point easily.  
+- add reboot pull command to cron:
+```bash
+@reboot sleep 30 && cd /home/ubuntu/git/ubuntu-bootstrap && git pull
+```
+- take timeshift image so you can restore up to this point easily.  (see create snapshot commands below)
     
 
 ## restore
@@ -149,7 +153,10 @@ This should be super easy to restore to this point and then continue testing.
 sudo timeshift --restore
 ```
 
-once you know your restore timeshift name you can do:
+once you know your restore timeshift name you can do to automate everything 
+
+WARNING! no prompts:
+
 ```bash
 sudo timeshift --restore --snapshot snapshot_name --scripted --quiet
 ```
@@ -157,16 +164,10 @@ sudo timeshift --restore --snapshot snapshot_name --scripted --quiet
 ## create new snapshot and delete old one
 
 WARNING! make sure you run `--restore` before you delete all images or you will be stuck and have to redo everything again.
+
 ```bash
 sudo timeshift --delete-all --scripted --quiet
 sudo timeshift --create --scripted --quiet
-```
-
-## add a git pull after reboot so this is always up to date.
-
-This sleeps so it waits for the network some.
-```bash
-@reboot sleep 30 && cd /home/ubuntu/git/ubuntu-bootstrap && git pull
 ```
 
 ## quick hack to know if I already ran playbooks.
