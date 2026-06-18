@@ -20,3 +20,4 @@ This is a dumping ground of random things I would like to eventually do.
 - [ ] - start a playbook for python 3rd party libraries (django, https://python-rq.org/, flask, sqlachemy, etc)
 - [ ] - start learning other programming languages (odin: https://www.youtube.com/watch?v=xDNSS9oZYPo)
 - [ ] - checkout custom django admin themes: https://grappelliproject.com/
+- [ ] - check out this programming language [vala](https://vala.dev/)

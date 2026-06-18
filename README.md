@@ -129,6 +129,7 @@ diff -r ubuntu-bootstrap-1.0 ubuntu-bootstrap-1.1
 
 # preparing a bare metal laptop for testing:
 
+I'm testing on a old lenovo T460s laptop.  I'm leverage using this [timeshift](https://github.com/linuxmint/timeshift) tool.
 
 ## setup
 - install latest ubuntu desktop LTS
@@ -152,6 +153,50 @@ once you know your restore timeshift name you can do:
 ```bash
 sudo timeshift --restore --snapshot snapshot_name --scripted --quiet
 ```
+
+## create new snapshot and delete old one
+
+WARNING! make sure you run `--restore` before you delete all images or you will be stuck and have to redo everything again.
+```bash
+sudo timeshift --delete-all --scripted --quiet
+sudo timeshift --create --scripted --quiet
+```
+
+## add a git pull after reboot so this is always up to date.
+
+This sleeps so it waits for the network some.
+```bash
+@reboot sleep 30 && cd /home/ubuntu/git/ubuntu-bootstrap && git pull
+```
+
+## quick hack to know if I already ran playbooks.
+
+if you see the ubuntu header usually that means nothing has ran.  It looks like this:
+```
+ssh ubuntu@192.168.1.95
+Welcome to Ubuntu 26.04 LTS (GNU/Linux 7.0.0-22-generic x86_64)
+
+ * Documentation:  https://docs.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+Expanded Security Maintenance for Applications is not enabled.
+
+0 updates can be applied immediately.
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+Last login: Wed Jun 17 14:40:05 2026 from 192.168.1.250
+ubuntu@ubuntu-ThinkPad-T460s:~$
+```
+
+if you don't see this banner that usually means playbooks have been ran to supress the banner.
+```
+ssh ubuntu@192.168.1.95
+ubuntu@ubuntu-ThinkPad-T460s:~$
+```
+
 
 # do you use AI tools? 
 
