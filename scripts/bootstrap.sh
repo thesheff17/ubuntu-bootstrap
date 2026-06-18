@@ -14,13 +14,8 @@ echo >> /home/ubuntu/.bashrc
 echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"' >> /home/ubuntu/.bashrc
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
 
-# anbile
-
 # install ansible
 brew install ansible --yes
-
-# check version
-ansible --version
 
 # already going to have the git repo locally so pull it
 cd /home/ubuntu/git/ubuntu-bootstrap/
@@ -32,4 +27,4 @@ ansible-playbook -i hosts playbooks/base.yaml --connection=local
 # elapsed time
 duration=$SECONDS
 elapsed_seconds=$((end_time - start_time))
-echo "bootstrap.sh completed - $((duration / 60)) minutes and $((duration % 60)) seconds elapsed."
+echo "bootstrap.sh completed - $((duration / 60)) minute(s) and $((duration % 60)) second(s) elapsed."

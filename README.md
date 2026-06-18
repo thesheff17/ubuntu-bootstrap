@@ -52,7 +52,7 @@ time ansible-playbook -i hosts playbooks/base.yaml --connection=local
 # desktop: sudo systemctl reboot -i
 ```
 
-There is a helper script in `scripts/boostrap.sh`
+There is a helper script in `scripts/bootstrap.sh`
 
 deploy [forgejo](https://forgejo.org/)
 
@@ -127,15 +127,6 @@ diff -r ubuntu-bootstrap-1.0 ubuntu-bootstrap-1.1
 
 - [pull requests](https://github.com/thesheff17/ubuntu-bootstrap/pulls) open a pull request here.
 
-# do you use AI tools? 
-
-yes I'm using a bunch random local tools.  I won't pay for any of this.
-
-- [llama.cpp](https://github.com/ggml-org/llama.cpp)
-- [lm studio](https://lmstudio.ai/)
-- [langchain](https://github.com/langchain-ai/langchain)
-- [opencode](https://opencode.ai/)
-
 # preparing a bare metal laptop for testing:
 
 
@@ -156,3 +147,17 @@ This should be super easy to restore to this point and then continue testing.
 ```bash
 sudo timeshift --restore
 ```
+
+once you know your restore timeshift name you can do:
+```bash
+sudo timeshift --restore --snapshot snapshot_name --scripted --quiet
+```
+
+# do you use AI tools? 
+
+yes I'm using a bunch random local tools.  I won't pay for any of this.
+
+- [llama.cpp](https://github.com/ggml-org/llama.cpp)
+- [lm studio](https://lmstudio.ai/)
+- [langchain](https://github.com/langchain-ai/langchain)
+- [opencode](https://opencode.ai/)
