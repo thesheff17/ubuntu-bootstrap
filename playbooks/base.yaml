@@ -45,8 +45,15 @@
           - python3-pip
           - vim
           - tmux
+          - ssh
         state: present
         update_cache: true
+
+    - name: ssh service enabled
+      ansible.builtin.service:
+        name: ssh
+        enabled: true
+        state: restarted
 
     - name: create directory for apt keyrings
       ansible.builtin.file:
